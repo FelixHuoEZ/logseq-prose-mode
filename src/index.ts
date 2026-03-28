@@ -22,6 +22,7 @@ type PluginSettings = {
   focusHideRightSidebar: boolean;
   focusHideTopBar: boolean;
   focusHidePageProperties: boolean;
+  focusEnterFullscreen: boolean;
 };
 
 const defaults: PluginSettings = {
@@ -38,11 +39,13 @@ const defaults: PluginSettings = {
   focusHideRightSidebar: false,
   focusHideTopBar: false,
   focusHidePageProperties: false,
+  focusEnterFullscreen: false,
 };
 
 const runtimeState = {
   leftSidebarWasVisible: null as boolean | null,
   rightSidebarWasVisible: null as boolean | null,
+  fullScreenWasVisible: null as boolean | null,
 };
 
 const settingsSchema: SettingSchemaDesc[] = [
@@ -158,6 +161,14 @@ const settingsSchema: SettingSchemaDesc[] = [
     default: defaults.focusHidePageProperties,
     description: "Hide the page properties block while prose mode is active.",
   },
+  {
+    key: "focusEnterFullscreen",
+    type: "boolean",
+    title: "Enter native fullscreen",
+    default: defaults.focusEnterFullscreen,
+    description:
+      "Use Logseq's native fullscreen while prose mode is active. On macOS this moves the app into a full-screen Space.",
+  },
 ];
 
 function getSettings(): PluginSettings {
@@ -219,11 +230,16 @@ function getRightSidebar(): HTMLElement | null {
   return parent.document.getElementById("right-sidebar");
 }
 
+function isNativeFullscreen(): boolean {
+  return parent.document.documentElement.classList.contains("is-fullscreen");
+}
+
 function enableFocusFeatures(): void {
   const settings = getSettings();
 
   runtimeState.leftSidebarWasVisible = null;
   runtimeState.rightSidebarWasVisible = null;
+  runtimeState.fullScreenWasVisible = null;
 
   if (settings.focusHideLeftSidebar) {
     runtimeState.leftSidebarWasVisible = isElementVisible(getLeftSidebar());
@@ -240,9 +256,21 @@ function enableFocusFeatures(): void {
       void logseq.App.setRightSidebarVisible(false);
     }
   }
+
+  if (settings.focusEnterFullscreen) {
+    runtimeState.fullScreenWasVisible = isNativeFullscreen();
+
+    if (!runtimeState.fullScreenWasVisible) {
+      logseq.App.setFullScreen(true);
+    }
+  }
 }
 
 function disableFocusFeatures(): void {
+  if (runtimeState.fullScreenWasVisible === false) {
+    logseq.App.setFullScreen(false);
+  }
+
   if (runtimeState.leftSidebarWasVisible) {
     void logseq.App.setLeftSidebarVisible(true);
   }
@@ -253,6 +281,7 @@ function disableFocusFeatures(): void {
 
   runtimeState.leftSidebarWasVisible = null;
   runtimeState.rightSidebarWasVisible = null;
+  runtimeState.fullScreenWasVisible = null;
 }
 
 function isEnabled(): boolean {

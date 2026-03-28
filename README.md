@@ -22,6 +22,7 @@ Concept illustration of the writing-focused layout with bullets and indentation 
 - Flatten nested indentation to reduce the outliner feel
 - Remove thread lines and tighten page layout for writing
 - Optional focus features: hide sidebars, top bar, and page properties while prose mode is active
+- Optional native fullscreen on desktop, including real macOS full-screen behavior
 - Optional support for applying the mode to the right sidebar too
 
 ## Settings
@@ -39,6 +40,7 @@ Concept illustration of the writing-focused layout with bullets and indentation 
 - `Hide right sidebar`: temporarily hide the right sidebar in prose mode
 - `Hide top bar`: fade the top bar until hover while prose mode is active
 - `Hide page properties`: hide the page properties block in prose mode
+- `Enter native fullscreen`: use Logseq's native fullscreen while prose mode is active
 
 ## Install
 
