@@ -85,7 +85,7 @@ Then load the plugin in Logseq from this folder.
 ```bash
 npm install
 npm run release:zip
-git tag v0.1.1
+git tag v0.x.y
 git push origin main --tags
 ```
 
@@ -98,7 +98,6 @@ This plugin is an independent implementation.
 Some writing and focus-related ideas were informed by these open-source Logseq plugins:
 
 - [logseq-focus-mode](https://github.com/sethfair/logseq-focus-mode) by Seth Fair, licensed under MIT
-- [logseq-typewriter-mode](https://github.com/b-yp/logseq-typewriter-mode) by b-yp, licensed under MIT
 
 Prose Mode does not bundle these plugins directly, but it benefits from the ideas and patterns they explored.
 
