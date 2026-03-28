@@ -1,5 +1,7 @@
 node_modules/
 dist/
+release/
+logseq-prose-mode.zip
 
 .DS_Store
 

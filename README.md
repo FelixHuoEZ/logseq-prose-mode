@@ -2,6 +2,8 @@
 
 Focused document-style writing mode for Logseq.
 
+Plugin ID: `logseq-prose-mode`
+
 ## Author
 
 - FelixHuoEZ
@@ -39,11 +41,23 @@ Concept illustration of the writing-focused layout with bullets and indentation 
 
 Search for `Prose Mode` in the Logseq plugin marketplace after the plugin is approved.
 
-### Manual
+### From GitHub Release
 
-1. Download the latest release zip from GitHub.
-2. Unzip it into a local folder.
-3. In Logseq, use `Plugins` -> `Load unpacked plugin` and select that folder.
+1. Open the latest release on GitHub.
+2. Download `logseq-prose-mode.zip`.
+3. Unzip it into a local folder.
+4. In Logseq, use `Plugins` -> `Load unpacked plugin` and select that folder.
+
+### From Source
+
+This repository is the source code repository. It does not commit `dist/` on `main`.
+
+If you want to run the plugin from source:
+
+1. Clone this repository.
+2. Run `npm install`.
+3. Run `npm run build`.
+4. In Logseq, use `Plugins` -> `Load unpacked plugin` and select this folder.
 
 ## Development
 
@@ -53,6 +67,24 @@ npm run build
 ```
 
 Then load the plugin in Logseq from this folder.
+
+## Release Strategy
+
+- `main` stores source files and release automation, not committed `dist/` artifacts
+- GitHub Releases are the installation channel for packaged builds
+- `npm run release:zip` builds `dist/` and creates `logseq-prose-mode.zip`
+- The release zip contains the files Logseq needs at runtime: `dist/`, `package.json`, `README.md`, `LICENSE`, and `icon.png`
+
+## Maintainer Release Flow
+
+```bash
+npm install
+npm run release:zip
+git tag v0.1.1
+git push origin main --tags
+```
+
+Pushing a version tag triggers the publish workflow and uploads the release zip automatically.
 
 ## License
 

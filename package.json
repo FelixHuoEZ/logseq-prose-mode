@@ -7,12 +7,14 @@
   "main": "dist/index.html",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "package:release": "node scripts/package-release.mjs",
+    "release:zip": "npm run build && npm run package:release"
   },
   "logseq": {
     "id": "logseq-prose-mode",
     "title": "Prose Mode",
-    "icon": "./icon.svg"
+    "icon": "./icon.png"
   },
   "devDependencies": {
     "@logseq/libs": "^0.0.17",
