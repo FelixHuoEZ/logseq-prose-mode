@@ -1,6 +1,6 @@
 # logseq-prose-mode
 
-Document-style writing mode for Logseq.
+Focused document-style writing mode for Logseq.
 
 ## Features
 
