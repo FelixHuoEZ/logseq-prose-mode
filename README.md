@@ -21,6 +21,7 @@ Concept illustration of the writing-focused layout with bullets and indentation 
 - Hide normal block bullets while keeping them available on hover
 - Flatten nested indentation to reduce the outliner feel
 - Remove thread lines and tighten page layout for writing
+- Optional focus features: hide sidebars, top bar, and page properties while prose mode is active
 - Optional support for applying the mode to the right sidebar too
 
 ## Settings
@@ -34,6 +35,10 @@ Concept illustration of the writing-focused layout with bullets and indentation 
 - `Keep typed list bullets`: keep visible bullets/numbers for typed lists
 - `Content left padding`: page padding in prose mode
 - `Content right padding`: page padding in prose mode
+- `Hide left sidebar`: temporarily hide the left sidebar in prose mode
+- `Hide right sidebar`: temporarily hide the right sidebar in prose mode
+- `Hide top bar`: fade the top bar until hover while prose mode is active
+- `Hide page properties`: hide the page properties block in prose mode
 
 ## Install
 
@@ -85,6 +90,17 @@ git push origin main --tags
 ```
 
 Pushing a version tag triggers the publish workflow and uploads the release zip automatically.
+
+## Acknowledgements
+
+This plugin is an independent implementation.
+
+Some writing and focus-related ideas were informed by these open-source Logseq plugins:
+
+- [logseq-focus-mode](https://github.com/sethfair/logseq-focus-mode) by Seth Fair, licensed under MIT
+- [logseq-typewriter-mode](https://github.com/b-yp/logseq-typewriter-mode) by b-yp, licensed under MIT
+
+Prose Mode does not bundle these plugins directly, but it benefits from the ideas and patterns they explored.
 
 ## License
 

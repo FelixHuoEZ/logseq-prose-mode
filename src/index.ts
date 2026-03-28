@@ -18,6 +18,10 @@ type PluginSettings = {
   keepTypedListBullets: boolean;
   contentLeftPadding: number;
   contentRightPadding: number;
+  focusHideLeftSidebar: boolean;
+  focusHideRightSidebar: boolean;
+  focusHideTopBar: boolean;
+  focusHidePageProperties: boolean;
 };
 
 const defaults: PluginSettings = {
@@ -30,6 +34,15 @@ const defaults: PluginSettings = {
   keepTypedListBullets: true,
   contentLeftPadding: 48,
   contentRightPadding: 40,
+  focusHideLeftSidebar: false,
+  focusHideRightSidebar: false,
+  focusHideTopBar: false,
+  focusHidePageProperties: false,
+};
+
+const runtimeState = {
+  leftSidebarWasVisible: null as boolean | null,
+  rightSidebarWasVisible: null as boolean | null,
 };
 
 const settingsSchema: SettingSchemaDesc[] = [
@@ -110,6 +123,41 @@ const settingsSchema: SettingSchemaDesc[] = [
     default: defaults.contentRightPadding,
     description: "Right padding in pixels for page content while prose mode is active.",
   },
+  {
+    key: "focus",
+    type: "heading",
+    title: "Focus",
+    default: null,
+    description: "",
+  },
+  {
+    key: "focusHideLeftSidebar",
+    type: "boolean",
+    title: "Hide left sidebar",
+    default: defaults.focusHideLeftSidebar,
+    description: "Temporarily hide the left sidebar while prose mode is active.",
+  },
+  {
+    key: "focusHideRightSidebar",
+    type: "boolean",
+    title: "Hide right sidebar",
+    default: defaults.focusHideRightSidebar,
+    description: "Temporarily hide the right sidebar while prose mode is active.",
+  },
+  {
+    key: "focusHideTopBar",
+    type: "boolean",
+    title: "Hide top bar",
+    default: defaults.focusHideTopBar,
+    description: "Fade the top bar while prose mode is active and reveal it on hover.",
+  },
+  {
+    key: "focusHidePageProperties",
+    type: "boolean",
+    title: "Hide page properties",
+    default: defaults.focusHidePageProperties,
+    description: "Hide the page properties block while prose mode is active.",
+  },
 ];
 
 function getSettings(): PluginSettings {
@@ -148,11 +196,71 @@ function clearModeClasses(): void {
   parent.document.body.classList.remove(BODY_CLASS);
 }
 
+function isElementVisible(element: HTMLElement | null): boolean {
+  if (!element) {
+    return false;
+  }
+
+  const style = parent.getComputedStyle(element);
+  return (
+    style.display !== "none" &&
+    style.visibility !== "hidden" &&
+    style.opacity !== "0" &&
+    element.getBoundingClientRect().width > 0 &&
+    element.getBoundingClientRect().height > 0
+  );
+}
+
+function getLeftSidebar(): HTMLElement | null {
+  return parent.document.getElementById("left-sidebar");
+}
+
+function getRightSidebar(): HTMLElement | null {
+  return parent.document.getElementById("right-sidebar");
+}
+
+function enableFocusFeatures(): void {
+  const settings = getSettings();
+
+  runtimeState.leftSidebarWasVisible = null;
+  runtimeState.rightSidebarWasVisible = null;
+
+  if (settings.focusHideLeftSidebar) {
+    runtimeState.leftSidebarWasVisible = isElementVisible(getLeftSidebar());
+
+    if (runtimeState.leftSidebarWasVisible) {
+      void logseq.App.setLeftSidebarVisible(false);
+    }
+  }
+
+  if (settings.focusHideRightSidebar) {
+    runtimeState.rightSidebarWasVisible = isElementVisible(getRightSidebar());
+
+    if (runtimeState.rightSidebarWasVisible) {
+      void logseq.App.setRightSidebarVisible(false);
+    }
+  }
+}
+
+function disableFocusFeatures(): void {
+  if (runtimeState.leftSidebarWasVisible) {
+    void logseq.App.setLeftSidebarVisible(true);
+  }
+
+  if (runtimeState.rightSidebarWasVisible) {
+    void logseq.App.setRightSidebarVisible(true);
+  }
+
+  runtimeState.leftSidebarWasVisible = null;
+  runtimeState.rightSidebarWasVisible = null;
+}
+
 function isEnabled(): boolean {
   return parent.document.body.classList.contains(BODY_CLASS);
 }
 
 function setEnabled(enabled: boolean): void {
+  disableFocusFeatures();
   clearModeClasses();
 
   if (!enabled) {
@@ -164,6 +272,7 @@ function setEnabled(enabled: boolean): void {
   }
 
   parent.document.body.classList.add(BODY_CLASS);
+  enableFocusFeatures();
 }
 
 function toggle(): void {
@@ -255,6 +364,28 @@ function buildStyles(): string {
     `
     : "";
 
+  const focusHideTopBar = settings.focusHideTopBar
+    ? `
+    body.${BODY_CLASS} #head {
+      opacity: 0.04 !important;
+      transition: opacity 140ms ease;
+    }
+
+    body.${BODY_CLASS} #head:hover,
+    body.${BODY_CLASS} #head:focus-within {
+      opacity: 1 !important;
+    }
+    `
+    : "";
+
+  const focusHidePageProperties = settings.focusHidePageProperties
+    ? `
+    body.${BODY_CLASS} .pre-block {
+      display: none !important;
+    }
+    `
+    : "";
+
   return `
   .cv-toggle {
     display: flex;
@@ -318,6 +449,8 @@ function buildStyles(): string {
   ${showBulletsOnHover}
   ${flattenIndentation}
   ${keepTypedListBullets}
+  ${focusHideTopBar}
+  ${focusHidePageProperties}
 
   .${MODE_CLASS} .embed-page {
     padding-left: 0 !important;
@@ -415,13 +548,10 @@ async function main(): Promise<void> {
   applyStyles();
   registerCommands();
 
-  logseq.onSettingsChanged((_newSettings, oldSettings) => {
+  logseq.onSettingsChanged((_newSettings, _oldSettings) => {
     applyStyles();
 
-    if (
-      oldSettings.applyToRightSidebar !== getSettings().applyToRightSidebar &&
-      isEnabled()
-    ) {
+    if (isEnabled()) {
       setEnabled(true);
     }
   });
