@@ -2,6 +2,8 @@
   "name": "logseq-prose-mode",
   "version": "0.1.0",
   "description": "Focused document-style writing mode for Logseq.",
+  "author": "FelixHuoEZ with Codex",
+  "license": "MIT",
   "main": "dist/index.html",
   "scripts": {
     "dev": "vite",

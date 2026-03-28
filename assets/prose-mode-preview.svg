@@ -1,0 +1,43 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#F5F1E8"/>
+  <rect x="40" y="40" width="1200" height="640" rx="28" fill="#FCFAF4" stroke="#D9D0C3" stroke-width="2"/>
+  <rect x="72" y="72" width="1136" height="56" rx="18" fill="#ECE3D6"/>
+  <circle cx="104" cy="100" r="10" fill="#C96546"/>
+  <circle cx="136" cy="100" r="10" fill="#D5A548"/>
+  <circle cx="168" cy="100" r="10" fill="#6C8F5B"/>
+  <text x="220" y="109" fill="#54493D" font-family="Georgia, serif" font-size="28">Logseq Prose Mode</text>
+
+  <rect x="96" y="164" width="500" height="468" rx="24" fill="#F8F3EA" stroke="#D9D0C3" stroke-width="2"/>
+  <text x="126" y="212" fill="#6A5C4D" font-family="Arial, sans-serif" font-size="24" font-weight="700">Outline View</text>
+  <line x1="178" y1="260" x2="178" y2="576" stroke="#D8C9B8" stroke-width="3"/>
+  <circle cx="148" cy="266" r="8" fill="#9F8B75"/>
+  <rect x="196" y="248" width="320" height="18" rx="9" fill="#85705B" fill-opacity="0.92"/>
+  <rect x="196" y="281" width="274" height="12" rx="6" fill="#B8A690"/>
+  <circle cx="208" cy="334" r="7" fill="#A2907B"/>
+  <rect x="232" y="320" width="246" height="16" rx="8" fill="#8A7560" fill-opacity="0.9"/>
+  <rect x="232" y="350" width="202" height="11" rx="5.5" fill="#B8A690"/>
+  <circle cx="238" cy="400" r="7" fill="#A2907B"/>
+  <rect x="262" y="386" width="220" height="16" rx="8" fill="#8A7560" fill-opacity="0.9"/>
+  <rect x="262" y="416" width="188" height="11" rx="5.5" fill="#B8A690"/>
+  <circle cx="148" cy="490" r="8" fill="#9F8B75"/>
+  <rect x="196" y="472" width="334" height="18" rx="9" fill="#85705B" fill-opacity="0.92"/>
+  <rect x="196" y="505" width="290" height="12" rx="6" fill="#B8A690"/>
+  <text x="126" y="602" fill="#8B7A69" font-family="Arial, sans-serif" font-size="18">Bullets, nesting guides, and indentation stay visible.</text>
+
+  <rect x="684" y="164" width="500" height="468" rx="24" fill="#FFFDF8" stroke="#D9D0C3" stroke-width="2"/>
+  <text x="714" y="212" fill="#6A5C4D" font-family="Arial, sans-serif" font-size="24" font-weight="700">Prose Mode</text>
+  <rect x="736" y="246" width="378" height="22" rx="11" fill="#56493C"/>
+  <rect x="736" y="286" width="396" height="12" rx="6" fill="#9C8974"/>
+  <rect x="736" y="310" width="382" height="12" rx="6" fill="#9C8974"/>
+  <rect x="736" y="334" width="354" height="12" rx="6" fill="#9C8974"/>
+  <rect x="736" y="392" width="360" height="18" rx="9" fill="#6B5A49"/>
+  <rect x="736" y="425" width="404" height="12" rx="6" fill="#9C8974"/>
+  <rect x="736" y="449" width="392" height="12" rx="6" fill="#9C8974"/>
+  <rect x="736" y="473" width="346" height="12" rx="6" fill="#9C8974"/>
+  <rect x="736" y="531" width="332" height="18" rx="9" fill="#6B5A49"/>
+  <rect x="736" y="564" width="386" height="12" rx="6" fill="#9C8974"/>
+  <text x="714" y="602" fill="#8B7A69" font-family="Arial, sans-serif" font-size="18">Bullets are deemphasized and nested blocks read like paragraphs.</text>
+
+  <rect x="1032" y="96" width="126" height="40" rx="14" fill="#D76E4B"/>
+  <text x="1057" y="122" fill="#FFF9F2" font-family="Arial, sans-serif" font-size="18" font-weight="700">ON</text>
+</svg>

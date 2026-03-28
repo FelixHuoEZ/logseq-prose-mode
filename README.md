@@ -2,6 +2,17 @@
 
 Focused document-style writing mode for Logseq.
 
+## Author
+
+- FelixHuoEZ
+- Codex
+
+## Preview
+
+![Prose Mode preview](./assets/prose-mode-preview.svg)
+
+Concept illustration of the writing-focused layout with bullets and indentation visually reduced.
+
 ## Features
 
 - Toggle prose mode from the toolbar or command palette
@@ -22,6 +33,18 @@ Focused document-style writing mode for Logseq.
 - `Content left padding`: page padding in prose mode
 - `Content right padding`: page padding in prose mode
 
+## Install
+
+### From Marketplace
+
+Search for `Prose Mode` in the Logseq plugin marketplace after the plugin is approved.
+
+### Manual
+
+1. Download the latest release zip from GitHub.
+2. Unzip it into a local folder.
+3. In Logseq, use `Plugins` -> `Load unpacked plugin` and select that folder.
+
 ## Development
 
 ```bash
@@ -30,3 +53,7 @@ npm run build
 ```
 
 Then load the plugin in Logseq from this folder.
+
+## License
+
+MIT. See [LICENSE](./LICENSE).
